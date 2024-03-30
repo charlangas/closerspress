@@ -1,0 +1,660 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    letter-spacing: 0.05rem;
+    color: #1D2543;
+}
+
+p {
+    font-family: "Gilda Display", serif;
+    font-style: normal;
+    line-height: 2rem;
+    color: #4A4E69;
+}
+
+h1, h2, h5, h6 {
+    font-weight: 700;
+    font-style: normal;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-weight: 500;
+}
+
+h4 {
+    color: #7000FF;
+    font-size: .8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .25rem;
+}
+
+a {
+    color: #000;
+    letter-spacing: 0.05rem;
+    text-decoration: none;
+}
+
+.cta-button {
+    padding: 10px 20px;
+    background-color: #7000FF;
+    border-radius: 100px;
+    color: #fff;
+}
+
+.cta-button:hover {
+    background-color: #5200E1;
+}
+
+.secondary-button {
+    padding: 10px 20px;
+    border: 3px solid #7000FF;
+    border-radius: 100px;
+    color: #7000FF;
+}
+
+.text-link {
+    color: #7000FF;
+    font-weight: 500;
+}
+
+.text-link:hover {
+    border-bottom: 2px solid #5200E1;
+}
+
+/* Layout Styles */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.three-columns {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.three-columns .column img {
+    height: 4rem;
+}
+
+.column {
+    flex: 1; /* Ensure the columns take up equal space */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align the items horizontally */
+    padding: 20px;
+}
+
+.column img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto;
+    margin-bottom: 20px; /* Space between image and headline */
+}
+
+/* Navigation Styles */
+nav {
+    background-color: transparent; /* Initial transparent background */
+    transition: background-color 0.3s;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+nav.scrolled {
+    background-color: #fff; /* White background when scrolled */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.nav-links a {
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    border-bottom: 2px solid #7000FF;
+}
+
+.nav-links a, .nav-links button {
+    margin-left: 2rem;
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+    display: none; /* Hidden by default, shown in mobile view */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: black;
+    border-radius: 3px;
+    transition: all 0.3s linear;
+}
+
+/* Transform hamburger into X */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Hero Section Styles */
+.hero {
+    display: flex;
+    align-items: center;
+    background: #EBECF0;
+    /* background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(112,0,255,0.1045605742296919) 100%);*/
+    justify-content: space-between;
+    padding: 5rem 2rem;
+    
+}
+
+.hero-container{
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.text-content {
+    flex: 1;
+    max-width: 50%;
+}
+
+.hero-image {
+    flex: 1;
+    max-width: 40%;
+    height: auto;
+    padding-left:4rem;
+    object-fit: contain;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+}
+
+/* Logos Section Styles */
+.logos-section {
+    margin: 0 auto;
+}
+
+.logos-section h2, .feature-section h2 {
+    text-align: center;
+    padding: 2rem;
+}
+
+.logos-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.logos-row img {
+    margin: 0 20px; /* Adjust the margin as needed */
+    max-width: 100px; /* Adjust based on your preference or size of the logos */
+    height: auto;
+}
+
+/* Features section */
+.features-container {
+    display: flex;
+    margin: 0;
+}
+
+/* Ensures the feature divs are adjacent to each other and to the viewport's edges, with no margin */
+.feature {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.feature-text {
+    border-radius: 20px 0 0 20px;
+    background-color: #FAF8FC;
+}
+
+.feature-image {
+    border-radius: 0 20px 20px 0;
+    background-color: #FAF8FC;
+    background-position: center;
+    background-size: cover;
+}
+
+#photo1 {
+    background-image: url("img/impossible-to-ignore.png");
+}
+
+#photo2 {
+    background-image: url("img/solution-stories.png");
+}
+
+/* CTA Section */
+.cta-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Comparison table */
+.comparison h2 {
+    text-align: center;
+    margin: 0 auto;
+}
+.comparison-table {
+    margin: 0 auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comparison-table th, .comparison-table td {
+    text-align: center;
+    padding: 1.5rem;
+    font-weight: 400;
+}
+
+.td-left, th {
+    font-weight: 500 !important;
+    font-size: 1.25rem;
+}
+
+.td-left {
+    text-align: left !important;
+}
+
+.bad {
+    color: #F5534D;
+}
+
+.good {
+    color: #00BD36;
+}
+
+.comparison-table tr {
+    border-bottom: 1px solid #ddd;
+    padding: 1.5rem 0;
+}
+
+.comparison-table .hover:hover {
+    background-color: #FAF8FC;
+    color: #7000FF;
+}
+
+/*Spacers*/
+.spacer-20 {
+    height: 20px;
+}
+
+.spacer-40 {
+    height: 40px;
+}
+
+.spacer-80 {
+    height: 80px;
+}
+
+/*How it works*/
+.how-it-works .content {
+    display: flex;
+    width: 100%;
+}
+
+.how-it-works h2 {
+    text-align: center;
+}
+
+#book h2 {
+    text-align: center;
+}
+
+.hiw-step {
+    font-weight: 200;
+    font-size: 0.8rem;
+    letter-spacing: 0.15rem;
+    color: #7000FF;
+    padding-right: 1rem;
+}
+
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+    padding: 1.5rem 0;
+}
+
+.row:hover {
+    background-color: #FAF8FC;
+}
+
+.row h3 {
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 10px;
+}
+
+/* All rows have pointer cursor by default */
+.row {
+    cursor: pointer;
+}
+
+/* Override for rows with visible descriptions - Assuming you add a class to indicate visibility */
+.row.expanded {
+    cursor: default;
+}
+
+.row .description {
+    display: none;
+    padding: 0 3rem;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FAF8FC;
+    border-radius: 0 20px 20px 0;
+}
+
+.right-column img {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    height: auto;
+}
+
+/* Pricing Section */
+.pricing .column {
+    background-color: #FAF8FC;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    margin: 1rem;
+}
+
+.pricing-primary {
+    border: 3px solid #7000FF;
+}
+
+.prices {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    letter-spacing: 0.05rem;
+    line-height: 0rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.per-book {
+    font-size: 1rem;
+}
+
+/* FAQ Section */
+.faq-section {
+    background-color: #2D223B;
+    color: #FAF8FC;
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 0;
+}
+
+.faq-section h2 {
+    font-size: 3.5rem;
+    padding-right: 1rem;
+}
+
+.faq-section h4 {
+    color: #FAF8FC;
+}
+
+.faq-container {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.faq-header {
+    padding-top: 3rem;
+    flex-basis: 50%; /* Adjust based on your design needs */
+}
+
+.faq-content {
+    flex-basis: 50%; /* Adjust based on your design needs */
+    padding-top: 3rem;
+}
+
+.faq-item {
+    background-color: #3B2952;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+}
+
+.faq-item .faq-answer {
+    color: #fff;
+    display: none;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-weight: 200;
+}
+
+.faq-answer p {
+    color: #fff;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    font-weight: 500;
+}
+
+.faq-toggle {
+    margin-left: auto;
+}
+
+.question-text {
+    text-align: left;
+}
+
+.plus-sign {
+    margin-left: auto;
+    padding: 0 10px;
+}
+
+/* FOOTER */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #EBECF0;
+    padding: 20px;
+    flex-wrap: wrap; /* Allows the footer to adapt responsively */
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 150px; /* Ensures columns don't get too narrow on smaller screens */
+    padding: 10px;
+}
+
+.footer-column h3, .footer-column p, .footer-column ul, .footer-column ul li {
+    text-align: left;
+}
+
+.footer-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-column ul li a {
+    color: #000;
+    text-decoration: none;
+    line-height: 2; /* Adds space between links */
+}
+
+
+/***********************************************************************************************************/
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container, .hero, .text-content, .hero-image {
+        flex-direction: row;
+        text-align: center;
+    }
+
+    nav {
+        position: relative;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .nav-container img {
+        z-index: 10002;
+    }
+
+    .hamburger {
+        display: flex;
+        position: fixed;
+        right: 25px;
+        top: 25px;
+        z-index: 1001;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-container {
+        flex-direction: column;
+    }
+    
+    .hero-image {
+        height: 250px;
+        padding-top: 2rem;
+    }
+
+    .how-it-works .right-column {
+        display: none;
+    }
+
+    .how-it-works .left-column {
+        flex: 1;
+    }
+
+    .nav-links.active {
+        position: fixed;
+        top: 0; /* Adjust based on the height of your nav bar to start the menu right below the nav bar */
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%; /* Ensures it spans the full width of the viewport */
+        background-color: #fff; /* White background for readability */
+        box-sizing: border-box; /* Ensures padding does not add to the width */
+        padding-top: 60px; /* Adjust this value based on your nav's height to avoid overlaying the logo */
+        z-index: 100; 
+    }
+
+    .text-content, .hero-image {
+        max-width: 100%;
+    }
+
+    .nav-links {
+        padding: 1rem;
+    }
+
+    .nav-links a {
+        margin-top: 1rem;
+    }
+
+    .features-container {
+        flex-direction: column;
+    }
+
+    .feature-text {
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .feature-image {
+        border-radius: 0 0 20px 20px;
+        min-height: 270px;
+    }
+
+    .three-columns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .site-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-column {
+        width: 100%; /* Makes each column full width */
+        text-align: center; /* Centers the content */
+    }
+
+    .faq-container {
+        flex-direction: column;
+    }
+}
