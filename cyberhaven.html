@@ -9,6 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="img/favicon.png">
+
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+        // Immediately-invoked Function Expression (IIFE) to initialize EmailJS
+        (function() {
+            emailjs.init("5hYX8DosCk2DxK3K1"); // Correctly pass the public key as a string
+        })();
+    </script>    
+<script type="text/javascript">
+    window.onload = function() {
+      var templateParams = {
+          // Add parameters based on your template, for example:
+          page_name: 'Cyberhaven Page',
+          date_time: new Date().toLocaleString() 
+      };
+      
+      emailjs.send('service_bpxzjpr', 'template_3uz4nwp', templateParams)
+          .then(function(response) {
+             console.log('SUCCESS!', response.status, response.text);
+          }, function(error) {
+             console.log('FAILED...', error);
+          });
+    };
+  </script>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBF8SCV608"></script>
@@ -19,7 +43,8 @@
 
   gtag('config', 'G-EBF8SCV608');
 </script>
-<body>
+
+  <body>
     <nav>
         <div class="nav-container">
             <a href="index.html"><img src="img/logo.svg" alt="Closers Press logo"></a>
