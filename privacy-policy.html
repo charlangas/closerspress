@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closers Press | Terms of Service</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EBF8SCV608"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EBF8SCV608');
+</script>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html"><img src="img/logo.svg" alt="Closers Press logo"></a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#process">How It Works</a>
+                <a href="#faqs">FAQs</a>
+                <a href="#book" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    <div class="spacer-40"></div>
+    <section class="main-container">
+        <h1>Privacy Policy</h1>
+<p>At Closers Press, we take your privacy seriously. This Privacy Policy outlines how we collect, use, disclose, and protect the personal information you provide when using our personalized storybook creation and delivery services.</p><br />
+<p>Information We Collect</p>
+<p>We may collect personal information such as your name, email address, company name, and contact details when you place an order or communicate with us. Additionally, we may collect information about your business, target clients, products/services, and any other relevant details necessary to provide our Services.</p><br />
+<p>Use of Information</p>
+<p>We use the information we collect to:</p>
+<p>Create and deliver personalized storybooks tailored to your business needs</p>
+<p>Communicate with you regarding your orders and our Services</p>
+<p>Improve and enhance our Services</p>
+<p>Comply with legal and regulatory requirements</p><br />
+<p>Data Sharing</p>
+<p>We do not sell, rent, or share your personal information with third parties for their promotional purposes. However, we may share your information with trusted service providers who assist us in operating our business and delivering the Services, such as print vendors and shipping carriers. These service providers are bound by confidentiality agreements and are not permitted to use your information for any other purpose.</p><br />
+<p>Data Security</p>
+<p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p><br />
+<p>Retention of Information</p>
+<p>We will retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law.</p><br />
+<p>Your Rights</p>
+<p>You may have certain rights regarding your personal information, such as the right to access, correct, or delete your information. If you wish to exercise these rights, please contact us using the information provided below.</p><br />
+<p>Changes to this Privacy Policy</p>
+<p>We may update this Privacy Policy from time to time. The latest version will always be available on our website.</p><br />
+<p>Contact Us</p>
+<p>If you have any questions or concerns about our Privacy Policy or the way we handle your personal information, please contact us at carlos@closerspress.com</p><br />
+<p>By using our Services, you agree to the terms of this Privacy Policy.</p>
+    </section>    
+    <footer class="site-footer">
+        <div class="footer-column">
+            <img src="img/logo.svg">
+            <p>Copyright © 2024 Closers Press. All rights reserved.</p>
+        </div>
+        <div class="footer-column">
+            <!-- Second column intentionally left empty -->
+        </div>
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <ul>
+                <li><a href="#" class="text-link">About Us</a></li>
+                <li><a href="#" class="text-link">Careers</a></li>
+                <li><a href="#" class="text-link">Contact Us</a></li>
+                <li><a href="#" class="text-link">LinkedIn</a></li>
+                <li><a href="#" class="text-link">Twitter</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="privacy-policy.html" class="text-link">Privacy Policy</a></li>
+                <li><a href="terms-of-service.html" class="text-link">Terms & Conditions</a></li>
+                <li><a href="mailto:carlos@closerspress.com" class="text-link">Help</a></li>
+            </ul>
+        </div>
+    </footer>    
+    <script>
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if(window.scrollY > 0) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('.left-column .row');
+
+            function collapseDescriptions() {
+                document.querySelectorAll('.description').forEach(desc => {
+                    desc.style.display = 'none';
+                });
+                // Remove 'expanded' class from all rows when collapsing descriptions
+                rows.forEach(row => {
+                    row.classList.remove('expanded');
+                });
+            }
+
+            function activateRow(row) {
+                const selectedImage = row.getAttribute('data-target-image');
+                document.getElementById('dynamic-image').src = selectedImage;
+                collapseDescriptions();
+                row.querySelector('.description').style.display = 'block';
+                // Add 'expanded' class to indicate visibility
+                row.classList.add('expanded');
+            }
+
+            rows.forEach(row => {
+                row.addEventListener('click', function() {
+                    activateRow(this);
+                });
+            });
+
+            // Expand 'Step 1' by default on page load and mark it as expanded
+            activateRow(rows[0]);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+        
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const answer = item.querySelector('.faq-answer');
+                    const isOpen = answer.style.display === 'block';
+        
+                    // Close all answers
+                    document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                    // Reset all toggles to '+'
+                    document.querySelectorAll('.faq-toggle').forEach(toggle => toggle.textContent = '+');
+        
+                    if(!isOpen) {
+                        answer.style.display = 'block';
+                        question.querySelector('.faq-toggle').textContent = '−'; // Change to minus when open
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closers Press | Terms of Service</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EBF8SCV608"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EBF8SCV608');
+</script>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html"><img src="img/logo.svg" alt="Closers Press logo"></a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#process">How It Works</a>
+                <a href="#faqs">FAQs</a>
+                <a href="#book" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    <div class="spacer-40"></div>
+    <section class="main-container">
+        <h1>Terms of Service</h1>
+        <p>Welcome to Closers Press! These Terms of Service ("Terms") govern your use of our personalized storybook creation and delivery services (the "Services"). By using our Services, you agree to be bound by these Terms.</p><br />
+<p>1. Services</p>
+<p>Closers Press creates custom storybooks tailored to help businesses connect with potential clients in a memorable and engaging way. Our Services include designing, producing, and delivering personalized storybooks based on information you provide about your business, target clients, and desired messaging.</p><br />
+<p>2. Order Process</p>
+<p>To initiate an order, you must provide us with the necessary details about your business, target clients, products/services, and any other relevant information we request. You are responsible for ensuring the accuracy and completeness of the information provided.</p><br />
+<p>3. Fees and Payment</p>
+<p>Our fees for the Services will be displayed on our website or provided to you during the order process. You agree to pay all fees in a timely manner using one of the accepted payment methods. Failure to pay may result in suspension or termination of the Services.</p><br />
+<p>4. Intellectual Property</p>
+<p>The storybooks created by Closers Press are considered our intellectual property. You are granted a limited, non-exclusive, non-transferable license to use the storybooks solely for your internal business purposes. You may not reproduce, distribute, or modify the storybooks without our prior written consent.</p><br />
+<p>5. Confidentiality</p>
+<p>We will treat any confidential or proprietary information you provide as part of the Services as confidential and will not disclose it to third parties without your consent, except as required by law or to fulfill the Services.</p>
+<p>6. Disclaimer of Warranties</p>
+<p>Our Services are provided on an "as is" and "as available" basis. We make no representations or warranties of any kind, express or implied, regarding the Services, including but not limited to accuracy, reliability, or fitness for a particular purpose.</p><br />
+<p>7. Limitation of Liability</p>
+<p>In no event shall Closers Press be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with the use or inability to use the Services.</p><br />
+<p>8. Termination</p>
+<p>We reserve the right to terminate or suspend your access to the Services at any time, for any reason, without prior notice.</p><br />
+<p>9. Governing Law</p>
+<p>These Terms shall be governed by and construed in accordance with the laws of the state of Jalisco.</p><br />
+<p>10. Modifications</p>
+<p>We may modify these Terms at any time. Your continued use of the Services after any modifications constitutes your acceptance of the updated Terms.</p><br />
+<p>Please review these Terms carefully before using our Services. If you have any questions or concerns, please contact us.<p>
+    </section>    
+    <footer class="site-footer">
+        <div class="footer-column">
+            <img src="img/logo.svg">
+            <p>Copyright © 2024 Closers Press. All rights reserved.</p>
+        </div>
+        <div class="footer-column">
+            <!-- Second column intentionally left empty -->
+        </div>
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <ul>
+                <li><a href="#" class="text-link">About Us</a></li>
+                <li><a href="#" class="text-link">Careers</a></li>
+                <li><a href="#" class="text-link">Contact Us</a></li>
+                <li><a href="#" class="text-link">LinkedIn</a></li>
+                <li><a href="#" class="text-link">Twitter</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="privacy-policy.html" class="text-link">Privacy Policy</a></li>
+                <li><a href="terms-of-service.html" class="text-link">Terms & Conditions</a></li>
+                <li><a href="mailto:carlos@closerspress.com" class="text-link">Help</a></li>
+            </ul>
+        </div>
+    </footer>    
+    <script>
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if(window.scrollY > 0) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('.left-column .row');
+
+            function collapseDescriptions() {
+                document.querySelectorAll('.description').forEach(desc => {
+                    desc.style.display = 'none';
+                });
+                // Remove 'expanded' class from all rows when collapsing descriptions
+                rows.forEach(row => {
+                    row.classList.remove('expanded');
+                });
+            }
+
+            function activateRow(row) {
+                const selectedImage = row.getAttribute('data-target-image');
+                document.getElementById('dynamic-image').src = selectedImage;
+                collapseDescriptions();
+                row.querySelector('.description').style.display = 'block';
+                // Add 'expanded' class to indicate visibility
+                row.classList.add('expanded');
+            }
+
+            rows.forEach(row => {
+                row.addEventListener('click', function() {
+                    activateRow(this);
+                });
+            });
+
+            // Expand 'Step 1' by default on page load and mark it as expanded
+            activateRow(rows[0]);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+        
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const answer = item.querySelector('.faq-answer');
+                    const isOpen = answer.style.display === 'block';
+        
+                    // Close all answers
+                    document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                    // Reset all toggles to '+'
+                    document.querySelectorAll('.faq-toggle').forEach(toggle => toggle.textContent = '+');
+        
+                    if(!isOpen) {
+                        answer.style.display = 'block';
+                        question.querySelector('.faq-toggle').textContent = '−'; // Change to minus when open
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
