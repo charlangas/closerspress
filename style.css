@@ -560,6 +560,32 @@ nav.scrolled {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+    h1 {
+        font-size: 2.5em !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        text-align: center;
+    }
+
+    table {
+        font-size: .75rem !important;
+    }
+
+    th {
+        font-size: .75rem !important;
+    }
+
+    td {
+        font-size: .75rem !important;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
     .nav-container, .hero, .text-content, .hero-image {
         flex-direction: row;
         text-align: center;
@@ -572,6 +598,7 @@ nav.scrolled {
     }
 
     .nav-container img {
+        max-width: 250px;
         z-index: 10002;
     }
 
@@ -588,15 +615,24 @@ nav.scrolled {
         flex-direction: column;
         width: 100%;
         text-align: center;
+        font-size: 2.5rem;
+        margin: 50px 0;
+    }
+
+    .nav-links a {
+        margin: 50px 0;
     }
 
     .hero-container {
         flex-direction: column;
+        align-items: center;
     }
     
     .hero-image {
-        height: 250px;
+        width: 90%;
+        max-width: 400px;
         padding-top: 2rem;
+        height: auto;
     }
 
     .how-it-works .right-column {
