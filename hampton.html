@@ -9,6 +9,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="img/favicon.png">
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+        // Immediately-invoked Function Expression (IIFE) to initialize EmailJS
+        (function() {
+            emailjs.init("5hYX8DosCk2DxK3K1"); // Correctly pass the public key as a string
+        })();
+    </script>    
+    <script type="text/javascript">
+    window.onload = function() {
+      var templateParams = {
+          // Add parameters based on your template, for example:
+          page_name: 'Hampton Page',
+          date_time: new Date().toLocaleString() 
+      };
+      
+      emailjs.send('service_bpxzjpr', 'template_3uz4nwp', templateParams)
+          .then(function(response) {
+             console.log('SUCCESS!', response.status, response.text);
+          }, function(error) {
+             console.log('FAILED...', error);
+          });
+    };
+  </script>
     </head>
 <body>
     <header class="site-header">
