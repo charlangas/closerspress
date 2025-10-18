@@ -3,66 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive 3D Book Display</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom font */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Ensure the canvas is responsive and doesn't overflow its container */
-        #book-container canvas {
-            width: 100% !important;
-            height: 100% !important;
-            display: block;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 text-gray-800 antialiased">
-
-    <!-- Header -->
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-6 py-4">
-            <h1 class="text-2xl font-bold text-center text-gray-900">My Awesome Bookstore</h1>
-            <p class="text-center text-gray-600 mt-1">Featuring Interactive 3D Previews</p>
+    <title>Closers Press - Reach the Unreachable</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    </head>
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo"><img src="img/logo.svg" alt="Closers Press Logo"></a>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="#process">How It Works</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="https://calendar.app.google/BHnnKSn6nUMBL5hL8" target="_blank" class="highlight">Get Started</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
+                <span class="hamburger-icon"></span>
+            </button>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
-        <div class="flex flex-wrap lg:flex-nowrap gap-12 items-center">
-            
-            <!-- Book Description Area -->
-            <div class="w-full lg:w-1-2">
-                <h2 class="text-4xl font-bold mb-4">The Hitchhiker's Guide to the Galaxy</h2>
-                <p class="text-xl text-gray-700 mb-6">by Douglas Adams</p>
-                <p class="mb-4">
-                    A towel, it says, is about the most massively useful thing an interstellar hitchhiker can have. Partly it has great practical value. You can wrap it around you for warmth as you bound across the cold moons of Jaglan Beta; you can lie on it on the brilliant marble-sanded beaches of Santraginus V, inhaling the heady sea vapors...
-                </p>
-                <p class="mb-8">
-                    Hover over the book to see it in glorious 3D. It's mostly harmless.
-                </p>
-                <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg">
-                    Add to Cart - $42.00
-                </button>
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Hi Sam! Ready to <br><span>Reach the Unreachable?</span></h1>
+                <p>Land meetings with hard-to-reach executives through personalized stories</p>
+                <a href="https://calendar.app.google/BHnnKSn6nUMBL5hL8" target="_blank" class="btn btn-primary">Book some time</a>
+                <div class="hero-image">
+                    <div id="book-container"></div>
+                </div>
             </div>
+        </section>
 
-            <!-- 3D Book Container -->
-            <div class="w-full lg:w-1-2 h-96 lg:h-[500px] flex items-center justify-center">
-                <!-- This div is where the 3D model will be rendered -->
-                <div id="book-container" class="w-full h-full cursor-pointer rounded-lg"></div>
+        <section class="benefits">
+            <div class="container">
+                <h2>Make an Unforgettable<br>First Impression</h2>
+                <div class="benefits-grid">
+                    <div class="benefits-item">
+                        <img src="img/impossible-to-ignore.svg">
+                        <h3>Be Impossible to Ignore.</h3>
+                        <p>With inboxes drowning in spam, a personalized book helps you stand out in the best way. We're talking an intro they'll actually remember fondly.</p>
+                    </div>
+                    <div class="benefits-item">
+                        <img src="img/homework.svg">
+                        <h3>Show You Did Your Homework</h3>
+                        <p>A customized book proves you took the time to really understand their business, their struggles, their goals. It says "We get you" before you've even said hello.</p>
+                    </div>
+                    <div class="benefits-item">
+                        <img src="img/reciprocate.svg">
+                        <h3>Gain a Psychological Advantage</h3>
+                        <p>Getting a thoughtful, bespoke gift sparks that natural reciprocity instinct in people. They're way more likely to return the favor by hearing you out.</p>
+                    </div>
+                    <div class="benefits-item">
+                        <img src="img/impactful.svg">
+                        <h3>Simple. Direct. Impactful</h3>
+                        <p>Showing your value through a storyline makes it so much stickier and more human than a bland sales script. Stories literally sell themselves.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="process" id="process">
+            <div class="container">
+               <h2>Our Proven Process</h2>
+               <p class="section-subtitle">This is how we grow your pipeline.</p>
+               <ol class="process-steps">
+                   <li class="step-item">
+                       <span class="step-number">01</span>
+                       <h4>Tailored Strategy Session</h4>
+                       <p>Understanding your vision, challenges, and objectives. We'll craft a bespoke storytelling approach that will resonate with your prospects.</p>
+                   </li>
+                    <li class="step-item">
+                       <span class="step-number">02</span>
+                       <h4>Story Development</h4>
+                       <p> Our team transforms your product's value proposition into an engaging story that addresses your prospects' needs and showcases how you offer the perfect solution.</p>
+                   </li>
+                    <li class="step-item">
+                       <span class="step-number">03</span>
+                       <h4>Precision-Targeted Research</h4>
+                       <p>Every prospect matters. We meticulously research each target to ensure the story and pitch are perfectly aligned with their interests and challenges.</p>
+                   </li>
+                    <li class="step-item">
+                       <span class="step-number">04</span>
+                       <h4>Seamless Approval and Production</h4>
+                       <p>Effortless from start to finish. Review and approve your custom book's digital draft, then let us handle the rest.</p>
+                   </li>
+                   <li class="step-item">
+                       <span class="step-number">05</span>
+                       <h4>Measurable Impact and Insights</h4>
+                       <p>We provide detailed reports on campaign success, including landing page visits, to help you understand the impact of your bespoke books and refine future outreach strategies.</p>
+                   </li>
+               </ol>
+           </div>
+       </section>
+
+        <section class="fullwidth-quote-section">
+            <div class="quote-content-wrapper">
+                <h2 class="quote-text">Slide Straight Past the Gatekeepers</h2>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <h2>Numbers That Speak For Themselves</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>90%</h3>
+                        <p>Open Rate</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>6%</h3>
+                        <p>Response Rate</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>71%</h3>
+                        <p>Of Execs Feel Direct Mail Is More Personal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="faq-headline">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            How do you ensure books are fully personalized and accurate?
+                            <span class="faq-icon"></span> </summary>
+                        <div class="faq-answer">
+                            <p>Our dedicated research team dives deep into public information, customer interviews, and any materials you provide to capture authentic, precise details for each book.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            Can we review the book content before printing?
+                             <span class="faq-icon"></span>
+                        </summary>
+                         <div class="faq-answer">
+                            <p>Absolutely. We build in revision rounds throughout the process to ensure you're 100% satisfied with the story, design, and print quality before finalizing.</p>
+                        </div>
+                    </details>
+
+                     <details class="faq-item">
+                        <summary class="faq-question">
+                            How long does the book production process take?
+                            <span class="faq-icon"></span>
+                        </summary>
+                         <div class="faq-answer">
+                            <p>Once we've agreed on a strategy and custom story framework with you, each book takes about 2 business days to go from concept to full digital draft. From digital draft to delivery, we can typically produce high-quality printed books within 1 week. However, timelines can vary based on quantity, complexity, and your team's feedback rounds.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            How personalized can the books get?
+                            <span class="faq-icon"></span>
+                        </summary>
+                         <div class="faq-answer">
+                            <p>Beyond customizing the story and illustrations, we can personalize each book with the recipient's name and other specific details, making each copy uniquely tailored.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            How do you ensure the books reach the right decision-makers?
+                            <span class="faq-icon"></span>
+                        </summary>
+                         <div class="faq-answer">
+                            <p>We work closely with you to verify mailing addresses and conduct research to ensure each book is delivered directly to the hands of your intended high-value prospects.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white mt-12 py-6 border-t">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; 2025 My Awesome Bookstore. All rights reserved.</p>
+    <footer class="site-footer gradient-bg">
+        <div class="container footer-container">
+            <div class="footer-grid">
+                <div class="footer-column footer-legal">
+                    <h4>Legal Links</h4>
+                    <ul>
+                        <li><a href="terms-of-service.html">Terms Of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-social">
+                    <h4>Stay connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter / X">
+                            X
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                           Ig
+                        </a>
+                        <a href="#" aria-label="LinkedIn / Other">
+                            In
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="copyright">&copy; 2025 Closers Press. All rights reserved.</p>
         </div>
     </footer>
 
+    <script src="script.js"></script>
     <!-- Three.js Library -->
     <script type="importmap">
         {
@@ -78,9 +230,9 @@
 
         function init() {
             // --- Configuration ---
-            const frontCoverUrl = 'img/hampton/front-cover.jpg';
-            const backCoverUrl = 'img/hampton/back-cover.jpg';
-            const spineUrl = 'img/hampton/front-cover.jpg';
+            const frontCoverUrl = 'https://closerspress.com/img/hampton/front-cover.jpg';
+            const backCoverUrl = 'https://closerspress.com/img/hampton/back-cover.jpg';
+            const spineUrl = 'https://closerspress.com/img/hampton/spine.jpg';
             
             const bookWidth = 5;
             const bookHeight = 7.5;
@@ -319,4 +471,3 @@
     </script>
 </body>
 </html>
-
