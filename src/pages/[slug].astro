@@ -93,3 +93,38 @@ const pageTitle = `Exclusive for ${founderName} | Closers Press`;
 		to { opacity: 1; transform: translateY(0); }
 	}
 </style>
+
+<script>
+    const sendVerification = async () => {
+        // Remove all listeners immediately to prevent multiple triggers
+        const events = ['mousemove', 'touchstart', 'scroll'];
+        events.forEach(event => {
+            window.removeEventListener(event, sendVerification);
+        });
+
+        const slug = window.location.pathname;
+        const sessionKey = `verified_${slug}`;
+
+        if (sessionStorage.getItem(sessionKey)) return;
+
+        try {
+            await fetch('/api/verify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ slug }),
+            });
+            sessionStorage.setItem(sessionKey, 'true');
+        } catch (error) {
+            console.error('Verification failed', error);
+        }
+    };
+
+    const events = ['mousemove', 'touchstart', 'scroll'];
+    const options = { once: true };
+
+    events.forEach(event => {
+        window.addEventListener(event, sendVerification, options);
+    });
+</script>
