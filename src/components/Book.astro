@@ -1,0 +1,308 @@
+---
+interface Props {
+  coverImage?: string; // Alias for coverDiffuse
+  coverDiffuse?: string;
+  backImage?: string; 
+  spineImage?: string;
+  width?: number;
+  height?: number;
+}
+
+const { 
+  coverImage,
+  coverDiffuse = coverImage || '/img/briq-cover.png', 
+  backImage = '/img/book-back.jpg', 
+  spineImage = '/img/book-spine.jpg',
+} = Astro.props;
+---
+
+<div 
+  id="book-canvas-container" 
+  class="w-full h-[500px] md:h-[600px] relative flex items-center justify-center overflow-visible cursor-grab active:cursor-grabbing"
+  style="-webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%); mask-image: linear-gradient(to bottom, black 85%, transparent 100%);"
+  data-cover={coverDiffuse}
+  data-back={backImage}
+  data-spine={spineImage}
+>
+  <div id="loading-indicator" class="absolute inset-0 flex items-center justify-center text-stone-400 text-sm font-sans tracking-[0.2em] uppercase animate-pulse">
+    Loading Experience...
+  </div>
+</div>
+
+<script>
+  import * as THREE from 'three';
+  import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
+
+  const container = document.getElementById('book-canvas-container');
+  const loading = document.getElementById('loading-indicator');
+
+  if (container) {
+    try {
+        const coverUrl = container.dataset.cover;
+        const backUrl = container.dataset.back;
+        const spineUrl = container.dataset.spine;
+
+        // --- Scene Setup ---
+        const scene = new THREE.Scene();
+        
+        // Camera - Static Position
+        const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 100);
+        camera.position.set(0, 0, 14); 
+
+        // Renderer
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        // Physical lighting settings
+        renderer.useLegacyLights = false;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        container.appendChild(renderer.domElement);
+
+        // Hide loading indicator as soon as renderer is attached
+        if (loading) loading.style.display = 'none';
+
+        // --- Static Lighting ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+        scene.add(ambientLight);
+
+        const mainLight = new THREE.DirectionalLight(0xfff5e6, 2.0);
+        mainLight.position.set(2, 5, 3); // Slightly in front and above
+        mainLight.castShadow = true;
+        mainLight.shadow.mapSize.width = 2048; // High res shadow
+        mainLight.shadow.mapSize.height = 2048;
+        mainLight.shadow.bias = -0.0001; 
+        mainLight.shadow.radius = 8; // Soft edges
+        scene.add(mainLight);
+
+        // --- Materials & Textures ---
+        const textureLoader = new THREE.TextureLoader();
+        
+        const loadTex = (url) => {
+            if (!url) return null;
+            const tex = textureLoader.load(url);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            // Crucial: Clamp to edge to prevent tiling on thin sides
+            tex.wrapS = THREE.ClampToEdgeWrapping;
+            tex.wrapT = THREE.ClampToEdgeWrapping;
+            return tex;
+        };
+
+        const coverTex = loadTex(coverUrl);
+        const backTex = loadTex(backUrl) || coverTex; // Fallback to cover if no back
+        const spineTex = loadTex(spineUrl) || coverTex; // Fallback
+
+        const boardColor = 0x222222; // Dark stone color for edges/inside
+
+        const coverMat = new THREE.MeshStandardMaterial({ map: coverTex, roughness: 0.4, metalness: 0.1 });
+        const backMat = new THREE.MeshStandardMaterial({ map: backTex, roughness: 0.4, metalness: 0.1 });
+        const spineMat = new THREE.MeshStandardMaterial({ map: spineTex, roughness: 0.4, metalness: 0.1 });
+        const boardEdgeMat = new THREE.MeshStandardMaterial({ color: boardColor, roughness: 0.9 });
+        
+        // --- 4-Part Composite Book Geometry ---
+        const bookGroup = new THREE.Group();
+
+        // Dimensions
+        const bWidth = 4.4;
+        const bHeight = 6.6;
+        const bDepth = 0.08; // Thickness of one board
+        const spineWidth = 0.8; // Total thickness of book
+        const radius = 0.05; // Corner radius
+
+        // 1. Front Board
+        const frontGeo = new RoundedBoxGeometry(bWidth, bHeight, bDepth, 4, radius);
+        // Materials array: Right, Left, Top, Bottom, Front, Back
+        // Front face (index 4) gets the cover image. Others get edge color.
+        const frontMats = [
+            boardEdgeMat, boardEdgeMat, boardEdgeMat, boardEdgeMat, 
+            coverMat, boardEdgeMat
+        ];
+        const frontMesh = new THREE.Mesh(frontGeo, frontMats);
+        frontMesh.position.z = (spineWidth / 2) - (bDepth / 2); // Push forward
+        frontMesh.castShadow = true;
+        frontMesh.receiveShadow = true;
+        bookGroup.add(frontMesh);
+
+        // 2. Back Board
+        const backGeo = new RoundedBoxGeometry(bWidth, bHeight, bDepth, 4, radius);
+        // Back face (index 5) gets the back image.
+        const backMats = [
+            boardEdgeMat, boardEdgeMat, boardEdgeMat, boardEdgeMat, 
+            boardEdgeMat, backMat
+        ];
+        const backMesh = new THREE.Mesh(backGeo, backMats);
+        backMesh.position.z = -(spineWidth / 2) + (bDepth / 2); // Push back
+        backMesh.castShadow = true;
+        backMesh.receiveShadow = true;
+        bookGroup.add(backMesh);
+
+        // 3. Spine
+        // Thin strip connecting left edges. 
+        // Height is same. Width is spineWidth. Depth is slightly curved or flat.
+        // Simulating with a box for now.
+        const spineGeo = new RoundedBoxGeometry(spineWidth, bHeight, bDepth, 4, 0.02);
+        // Rotate 90 deg around Y to stand on side
+        const spineMesh = new THREE.Mesh(spineGeo, [
+            boardEdgeMat, boardEdgeMat, boardEdgeMat, boardEdgeMat, 
+            spineMat, boardEdgeMat // Front face after rotation becomes "outward" spine face
+        ]);
+        spineMesh.rotation.y = -Math.PI / 2;
+        spineMesh.position.x = -(bWidth / 2) + (bDepth / 2); // Move to left edge
+        spineMesh.castShadow = true;
+        spineMesh.receiveShadow = true;
+        bookGroup.add(spineMesh);
+
+        // 4. Pages Block
+        // Sandwiched between boards.
+        const pWidth = bWidth - 0.2; // Recessed from right
+        const pHeight = bHeight - 0.2; // Recessed from top/bottom
+        const pDepth = spineWidth - (bDepth * 2) - 0.02; // Fit between boards with tiny gap
+        
+        const pagesGeo = new THREE.BoxGeometry(pWidth, pHeight, pDepth);
+        const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf5f5f5, roughness: 0.9, metalness: 0 });
+        
+        // Texture for page lines
+        const canvas = document.createElement('canvas');
+        canvas.width = 64; canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+            ctx.fillStyle = '#f5f5f5';
+            ctx.fillRect(0,0,64,64);
+            ctx.fillStyle = '#e5e5e5';
+            for(let i=0; i<64; i+=2) ctx.fillRect(0, i, 64, 1);
+        }
+        const pageTex = new THREE.CanvasTexture(canvas);
+        pagesMat.map = pageTex;
+
+        const pagesMesh = new THREE.Mesh(pagesGeo, pagesMat);
+        pagesMesh.position.x = 0.05; // Slightly right of spine center
+        pagesMesh.castShadow = true;
+        pagesMesh.receiveShadow = true;
+        bookGroup.add(pagesMesh);
+
+        scene.add(bookGroup);
+
+        // --- Floor Shadow Plane ---
+        const shadowPlaneGeo = new THREE.PlaneGeometry(30, 30);
+        const shadowPlaneMat = new THREE.ShadowMaterial({ opacity: 0.1 });
+        const shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowPlaneMat);
+        shadowPlane.rotation.x = -Math.PI / 2;
+        shadowPlane.position.y = -4; // Floor position
+        shadowPlane.receiveShadow = true;
+        scene.add(shadowPlane);
+
+
+        // --- Custom Drag Rotation + Scroll Physics Logic ---
+        
+        // 1. Variable Setup
+        let targetRotationX = 0.2; 
+        let targetRotationY = -0.5; // Initial angled view
+        let scrollOffsetRotationX = 0;
+        let scrollOffsetRotationY = 0;
+        let scrollOffsetPositionY = 0;
+
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        const sensitivity = 0.005;
+
+        // 2. The Scroll Listener
+        const updateScrollOffsets = () => {
+            const scrollY = window.scrollY;
+            // As user scrolls down:
+            // Tilt back subtly
+            scrollOffsetRotationX = scrollY * 0.0002; 
+            // Spin along Y axis
+            scrollOffsetRotationY = scrollY * 0.0008;
+            // Float up - Reduced sensitivity and added a cap to prevent clipping
+            scrollOffsetPositionY = Math.min(scrollY * 0.0004, 0.6); 
+        };
+        window.addEventListener('scroll', updateScrollOffsets);
+
+        // 3. The Drag Listener
+        const onMouseDown = (e) => {
+            isDragging = true;
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+            container.style.cursor = 'grabbing';
+        };
+
+        const onMouseMove = (e) => {
+            if (!isDragging) return;
+
+            const deltaX = e.clientX - previousMousePosition.x;
+            const deltaY = e.clientY - previousMousePosition.y;
+
+            // Update TARGETS, do not set rotation directly
+            targetRotationY += deltaX * sensitivity;
+            targetRotationX += deltaY * sensitivity;
+
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        };
+
+        const onMouseUp = () => {
+            isDragging = false;
+            container.style.cursor = 'grab';
+        };
+
+        container.addEventListener('mousedown', onMouseDown);
+        window.addEventListener('mousemove', onMouseMove); 
+        window.addEventListener('mouseup', onMouseUp);
+
+        // Touch support
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }, { passive: false });
+        
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const deltaX = e.touches[0].clientX - previousMousePosition.x;
+            const deltaY = e.touches[0].clientY - previousMousePosition.y;
+            
+            targetRotationY += deltaX * sensitivity;
+            targetRotationX += deltaY * sensitivity;
+            
+            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => { isDragging = false; });
+
+
+        // 4. The Animation Loop (Lerping)
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Smoothly interpolate towards the combined targets
+            // Y Rotation = Base Drag Target + Scroll Offset Spin
+            bookGroup.rotation.y = THREE.MathUtils.lerp(bookGroup.rotation.y, targetRotationY + scrollOffsetRotationY, 0.05);
+            
+            // X Rotation = Base Drag Target + Scroll Offset Tilt
+            bookGroup.rotation.x = THREE.MathUtils.lerp(bookGroup.rotation.x, targetRotationX + scrollOffsetRotationX, 0.05);
+            
+            // Y Position = Scroll Offset (Floats up)
+            bookGroup.position.y = THREE.MathUtils.lerp(bookGroup.position.y, scrollOffsetPositionY, 0.05);
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            if (!container) return;
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+
+    } catch (e) {
+        console.error('Three.js Initialization Error:', e);
+        if (loading) loading.textContent = "Error Loading 3D Content";
+    }
+  }
+</script>

@@ -1,0 +1,1012 @@
+/* --- General Styles & Variables --- */
+:root {
+    --primary-color: #FF7F49;
+    --dark-bg: #e5e5e5; /* Keeping name for compatibility, but value is light */
+    --header-bg-scrolled: #f0f0f0; /* Light background for scrolled header */
+    --card-bg: #ffffff;
+    --text-light: #000000; /* Main text is now black */
+    --text-medium: #333333; /* Secondary text is dark gray */
+    --text-dark: #000000;
+    --border-color: #cccccc;
+
+    --font-primary: "Geist", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-headlines: "Newsreader", serif;
+
+    --container-width: 1140px;
+    --spacing-unit: 1rem;
+    --header-height: 70px; /* Define header height */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* Typically 16px */
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    text-align: center; /* Ensure default centering */
+}
+
+.container {
+    width: 90%;
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--spacing-unit);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-headlines);
+    font-weight: 300; /* Specified weight */
+    line-height: 1.2;
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+    color: var(--text-light);
+    text-align: center; /* Ensure headlines are centered */
+}
+
+h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+    font-weight: 300;
+}
+
+h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+h3 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 300;
+}
+
+h4 {
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    font-weight: 300;
+}
+
+p {
+    margin-bottom: var(--spacing-unit);
+    color: var(--text-medium);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: darken(var(--primary-color), 10%); /* Slightly darker on hover */
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+section {
+    padding: calc(var(--spacing-unit) * 4) 0; /* Vertical padding for sections */
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto calc(var(--spacing-unit) * 2.5);
+    color: var(--text-medium);
+    font-size: 1.1rem;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.75);
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #ffffff;
+    transition: box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background: #ff6a2e;
+    color: #ffffff;
+    transform: translateY(-2px);
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(255, 127, 73, 0.4);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* --- Header --- */
+.site-header {
+    position: fixed; /* Fixed position at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent; /* Initial transparent background */
+    height: var(--header-height);
+    z-index: 1000; /* Ensure header is on top */
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
+    display: flex;
+    align-items: center;
+}
+
+/* Scrolled state for header (added by JavaScript) */
+.site-header.scrolled {
+    background-color: #070613; /* Solid background when scrolled */
+}
+
+.logo img {
+    width: 200px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Takes full width of .site-header padding area */
+    /* Use container class's max-width and margin for centering */
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--spacing-unit);
+}
+
+.main-nav {
+    /* Desktop styles */
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: calc(var(--spacing-unit) * 1.5);
+    margin: 0; padding: 0;
+}
+
+.main-nav a {
+    color: var(--text-light);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    text-decoration: none;
+}
+.main-nav a::after { /* Underline effect for desktop */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+.main-nav a:hover::after, .main-nav a:focus::after {
+    width: 100%;
+}
+.main-nav a:hover, .main-nav a:focus, .main-nav a.active {
+    color: var(--primary-color);
+}
+
+/* Mobile Navigation Toggle Button */
+.mobile-nav-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1100; /* Above nav menu when open */
+    position: relative; /* For absolute positioning of icon parts */
+    width: 30px;
+    height: 22px; /* Approx height for 3 lines */
+}
+
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    display: block;
+    background-color: var(--text-light);
+    height: 3px;
+    width: 100%;
+    border-radius: 3px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, top 0.3s ease-in-out, bottom 0.3s ease-in-out;
+    position: absolute;
+    left: 0;
+}
+
+.hamburger-icon {
+    top: 50%;
+    transform: translateY(-50%); /* Vertically center the middle bar */
+}
+.hamburger-icon::before {
+    top: -8px; /* Position above the middle bar */
+}
+.hamburger-icon::after {
+    bottom: -8px; /* Position below the middle bar */
+}
+
+/* Hamburger to "X" animation when .nav-open is on body or .site-header */
+.nav-open .hamburger-icon {
+    background-color: transparent; /* Middle bar disappears */
+}
+.nav-open .hamburger-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+.nav-open .hamburger-icon::after {
+    bottom: 0; /* Or top: 0; if you prefer them to cross perfectly */
+    transform: rotate(-45deg);
+}
+
+
+/* --- Hero Section --- */
+.hero {
+    text-align: center;
+    padding-top: calc(var(--spacing-unit) * 3); /* Internal padding for hero content from header */
+    padding-bottom: calc(var(--spacing-unit) * 2);
+    min-height: calc(80vh - var(--header-height)); /* Example: Make hero at least viewport height minus header */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent; /* Remove dark gradient background */
+}
+
+.hero h1 {
+    color: var(--text-light);
+    margin-bottom: var(--spacing-unit);
+}
+.hero h1 span, .highlight { /* If you want to highlight parts */
+    background-image: linear-gradient(to right, #FF7F49, #FF9F75); /* Orange gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: color 0.4s ease;
+}
+
+.highlight:hover {
+    background-image: linear-gradient(to right, #ff6a2e, #ff8a5c);
+    transition: color 0.4s ease;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 0 auto calc(var(--spacing-unit) * 1.5);
+    font-size: 1.1rem;
+    color: var(--text-medium);
+}
+
+.hero .btn {
+    margin-top: var(--spacing-unit);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+/* --- Benefits Section --- */
+.benefits {
+    background: transparent;
+    padding: calc(var(--spacing-unit) * 4) 0;
+}
+
+.benefits .container {
+    padding: 3em 1em;
+    border: 1px solid var(--border-color);
+    border-radius: 40px;
+    background: #ffffff; /* White card background */
+    margin: 0 5%;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    text-align: center;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: calc(var(--spacing-unit) * 2);
+    text-align: center;
+}
+
+.benefits-item {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.benefits-item img {
+    margin: 1rem auto;
+}
+
+.benefits-item h3 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    color: var(--text-light);
+}
+
+/* --- Stats Section --- */
+.stats {
+    padding-top: 120px;
+    background-color: transparent;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: calc(var(--spacing-unit) * 2);
+    text-align: center;
+}
+
+.stat-item {
+    padding: 3em 1em;
+    border: 1px solid var(--border-color);
+    border-radius: 40px;
+    background: #ffffff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.stat-item h3 {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    color: var(--primary-color);
+    font-weight: 300;
+    margin-bottom: calc(var(--spacing-unit) * 0.25);
+}
+
+.stat-item p {
+    color: var(--text-medium);
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* --- Testimonials Section --- */
+.testimonials {
+    background-color: var(--card-bg); /* Slightly different background */
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--spacing-unit) * 2);
+}
+
+.testimonial-card {
+    background-color: var(--dark-bg); /* Darker cards */
+    padding: calc(var(--spacing-unit) * 1.5);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonial-card p:first-of-type { /* The quote */
+    font-style: italic;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    flex-grow: 1; /* Ensure quote takes available space */
+    color: var(--text-light);
+}
+
+.client-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-unit);
+    margin-top: auto; /* Push to bottom */
+}
+
+.client-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+
+.client-name {
+    display: block;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.client-title {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+/* --- NEW: Full-Width Quote Section --- */
+.fullwidth-quote-section {
+    background-image: url('img/bn-box.webp');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Use 'fixed' for parallax effect, 'scroll' for normal */
+    color: var(--text-light);
+    display: flex; /* Using flex to align content */
+    align-items: flex-end;
+    min-height: clamp(450px, 50vh, 700px); /* Responsive height */
+    padding: calc(var(--spacing-unit) * 3) 0; /* Overall vertical padding */
+    position: relative; /* For overlay */
+    overflow: hidden; /* In case content tries to escape */
+}
+
+/* Overlay for better text readability on background image */
+.fullwidth-quote-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0) 100%); /* Darker at bottom */
+    /* background-color: rgba(0, 0, 0, 0.55); /* Simpler overlay */
+    z-index: 1;
+}
+
+/* Wrapper for the quote text to apply container-like horizontal padding */
+.fullwidth-quote-section .quote-content-wrapper {
+    position: relative; /* To sit above the overlay */
+    z-index: 2;
+    width: 90%;
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--spacing-unit); /* Replicates .container horizontal padding */
+}
+
+.fullwidth-quote-section .quote-text {
+    font-size: clamp(1.8rem, 7vw, 4.75rem); /* Responsive font size for quote */
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--text-light);
+    text-align: left;
+    margin: 0; /* Remove default H2 margin */
+    padding-top: calc(var(--spacing-unit) * 1.5); /* Padding from the bottom of the section */
+    padding-left: var(--spacing-unit); /* Padding from the left edge of its container */
+    max-width: 65%; /* Don't let quote span entire width */
+}
+
+/* If using blockquote */
+.fullwidth-quote-section blockquote.quote-text {
+    border-left: 4px solid var(--primary-color);
+    padding-left: calc(var(--spacing-unit) * 1.5); /* Indent from border */
+}
+.fullwidth-quote-section blockquote.quote-text p {
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    color: var(--text-light); /* Ensure p inside blockquote is light */
+}
+.fullwidth-quote-section blockquote.quote-text footer {
+    font-size: 1rem;
+    color: var(--text-medium);
+    font-style: normal;
+}
+/* --- END NEW Section Styles --- */
+
+/* --- How We Help Section --- */
+.faq {
+    background-color: #020106;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: calc(var(--spacing-unit) * 2.5);
+    margin-top: calc(var(--spacing-unit) * 2.5);
+}
+
+.feature-item {
+    text-align: center;
+    padding: var(--spacing-unit);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto calc(var(--spacing-unit) * 1.5);
+}
+
+.feature-item h3 {
+    color: var(--text-light);
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.feature-item p {
+    color: var(--text-medium);
+    font-size: 0.95rem;
+}
+
+
+/* --- Process Section --- */
+.process {
+     background-color: transparent;
+}
+
+.process-steps {
+    list-style: none;
+    padding-left: 0;
+    max-width: 800px; /* Contain the steps */
+    margin: calc(var(--spacing-unit) * 2.5) auto 0;
+    position: relative;
+    text-align: center;
+}
+
+/* Optional: Add a visual connector line */
+.process-steps::before {
+    display: none;
+}
+
+.step-item {
+    padding: var(--spacing-unit);
+    position: relative; /* Needed for z-index of number */
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.step-number {
+    position: static;
+    display: inline-block;
+    border-radius: 50%;
+    width: 50px; /* Fixed width */
+    height: 50px;
+    padding-top: 0.8rem;
+    line-height: 1;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    background-color: var(--primary-color); /* Match section background to cover line */
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(255, 127, 73, 0.4);
+}
+
+.step-item h4 {
+    color: var(--text-light);
+    font-weight: 300;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.step-item p {
+    color: var(--text-medium);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+/* --- FAQ Section --- */
+.faq {
+    background-color: transparent; /* Ensure main dark background */
+    padding: calc(var(--spacing-unit) * 4) 0;
+}
+
+.faq-headline { /* Use default H2 styling or customize */
+     text-align: center;
+     margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.faq-list {
+    max-width: 850px; /* Adjust width as needed */
+    margin: 0 auto;
+}
+
+.faq-item {
+    
+    margin-bottom: calc(var(--spacing-unit) * 1.25); /* Space between cards */
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background: #ffffff;
+    overflow: hidden; /* Prevent content spill during animation */
+}
+
+.faq-question {
+    display: flex; /* Use flex to align text and icon */
+    justify-content: space-between; /* Push icon to the right */
+    align-items: center; /* Vertically center items */
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.75); /* Generous padding */
+    font-weight: 600;
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem); /* Responsive font size */
+    cursor: pointer;
+    position: relative; /* Needed for positioning pseudo-elements if summary marker hidden */
+    list-style: none; /* Remove default marker */
+    color: var(--text-light);
+    width: 100%; /* Ensure summary takes full width */
+}
+
+/* Hide default details marker */
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+.faq-question::marker { /* Firefox */
+   display: none;
+   content: ""; /* Required for display:none to work in some FF versions */
+}
+
+/* Custom Chevron Icon */
+.faq-icon {
+    display: inline-block;
+    width: 12px; /* Adjust size */
+    height: 12px;
+    border-left: 2px solid var(--text-medium); /* Create chevron shape */
+    border-bottom: 2px solid var(--text-medium);
+    transform: rotate(-45deg); /* Point down */
+    transition: transform 0.3s ease-in-out;
+    margin-left: var(--spacing-unit); /* Space from text */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Rotate Icon when question is open */
+.faq-item[open] .faq-question .faq-icon {
+    transform: rotate(135deg); /* Point up */
+}
+
+.faq-answer {
+    padding: 0 calc(var(--spacing-unit) * 1.75) calc(var(--spacing-unit) * 1.5); /* Padding excluding top */
+    color: var(--text-medium);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    text-align: left;
+}
+.faq-answer p {
+    margin-bottom: 0; /* Remove default bottom margin if needed */
+}
+
+/* Optional: Add slight hover effect to question */
+.faq-question:hover, .faq-question:focus {
+    background-color: var(--dark-bg); /* Very subtle hover */
+}
+
+
+/* --- Footer Section --- */
+footer {
+    height: auto;
+    padding-bottom: 2rem;
+}
+
+.site-footer.gradient-bg {
+    background-image: none;
+    background-color: var(--dark-bg);
+    padding: calc(var(--spacing-unit) * 5) 0 calc(var(--spacing-unit) * 2); /* More top padding */
+    color: var(--text-light);
+    border-top: 1px solid var(--border-color);
+    position: relative; /* For positioning elements like the logo potentially */
+    overflow: hidden; /* Prevent gradient bleed/scroll issues */
+}
+
+.footer-container {
+    position: relative; /* Ensure content is above pseudo elements if any */
+    z-index: 2;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: calc(var(--spacing-unit) * 3);
+    margin-bottom: calc(var(--spacing-unit) * 4); /* Space before logo/copyright */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.footer-column h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: calc(var(--spacing-unit) * 1.25);
+    color: var(--text-light);
+    text-align: center;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.footer-column ul li {
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+}
+
+.footer-column ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover,
+.footer-column ul li a:focus {
+    color: var(--text-light);
+    text-decoration: underline;
+}
+
+.social-links {
+    justify-content: center;
+    display: flex;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: calc(var(--spacing-unit) * 1.25); /* Space between icons */
+    color: var(--text-light);
+    text-decoration: none; /* Remove if using text placeholders */
+    /* Add styles if using actual icons (SVG/Font Awesome) */
+    /* font-size: 1.5rem; */ /* Example size */
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Placeholder text styling */
+    font-weight: bold;
+    border: 1px solid var(--text-light);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.social-links a:hover,
+.social-links a:focus {
+    color: var(--text-light);
+    border-color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: calc(var(--spacing-unit) * 3);
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    opacity: 0.8;
+}
+
+/* Responsive adjustments if needed for footer grid */
+@media (max-width: 576px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack columns on very small screens */
+        text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+        display: flex;
+        gap: var(--spacing-unit);
+        margin-right: 0; /* Reset margin when centered */
+    }
+    .social-links a {
+         margin-right: 0; /* Reset margin when using gap */
+    }
+    .footer-logo-large {
+        font-size: clamp(3rem, 20vw, 6rem); /* Adjust size for mobile */
+    }
+}
+/* --- Responsive Styles --- */
+
+/* Medium Devices (Tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    /* Adjust container width, padding, font sizes */
+    .container {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 3rem; /* Smaller H1 */
+    }
+    h2 {
+         font-size: 2.5rem; /* Smaller H2 */
+    }
+
+    /* Example: Stack grid columns */
+    .benefits-grid, .stats-grid, .footer-grid {
+        grid-template-columns: 1fr; /* Stack columns */
+        gap: calc(var(--spacing-unit) * 1.5);
+    }
+
+     /* Adjust padding for sections */
+     section {
+         padding: calc(var(--spacing-unit) * 3) 0;
+     }
+
+     /* Header adjustments if needed */
+     .main-nav ul {
+        gap: var(--spacing-unit); /* Reduce gap */
+     }
+}
+
+/* Small Devices (Landscape Phones, less than 768px) */
+@media (max-width: 767.98px) {
+     h1 {
+         font-size: 2.5rem;
+     }
+     h2 {
+         font-size: 2rem;
+     }
+
+     .hero p {
+         font-size: 1rem;
+     }
+
+     .fullwidth-quote-section {
+        min-height: clamp(250px, 40vh, 500px); /* Responsive height */
+    }
+
+    /* Make mobile nav visible and hide desktop nav */
+    .mobile-nav-toggle {
+        display: block; /* Show hamburger */
+    }
+
+    .main-nav {
+        /* Mobile nav styles - hidden by default */
+        display: none; /* Hide nav initially */
+        position: absolute;
+        top: var(--header-height); /* Position below header */
+        left: 0;
+        right: 0;
+        background-color: var(--header-bg-scrolled); /* Or your preferred mobile nav bg */
+        padding: var(--spacing-unit);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .main-nav.nav-open {
+        display: block; /* Show nav when toggled */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Stack nav links */
+        align-items: center;
+        gap: var(--spacing-unit);
+    }
+     .main-nav a::after { /* Remove desktop underline effect */
+         display: none;
+     }
+
+     .process-steps::before { /* Adjust or remove timeline */
+         left: 15px; /* Adjust position */
+     }
+     .step-item {
+         padding-left: calc(var(--spacing-unit) * 3); /* Less padding */
+     }
+     .step-number {
+         width: 40px;
+         height: 40px;
+         font-size: 1.2rem;
+         left: -5px; /* Adjust position */
+     }
+
+     .fullwidth-quote-section .quote-text {
+         font-size: clamp(1.5rem, 6vw, 2.5rem); /* Smaller quote text */
+         max-width: 90%; /* Allow more width */
+         padding-left: 0;
+     }
+}
+
+/* Extra Small Devices (Portrait Phones, less than 576px) */
+@media (max-width: 575.98px) {
+    h1 {
+        font-size: 2rem;
+    }
+     h2 {
+        font-size: 1.8rem;
+     }
+     h3 {
+         font-size: 1.1rem;
+     }
+
+    .container {
+        width: 98%;
+        padding: 0 calc(var(--spacing-unit) * 0.5);
+    }
+     .btn {
+         padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.2);
+         font-size: 0.9rem;
+     }
+
+     .hero {
+         min-height: 60vh; /* Adjust height */
+     }
+
+     .benefits .container {
+          margin: 0 2%; /* Reduce side margin */
+          padding: 2em 0.5em;
+          border-radius: 20px;
+     }
+    .stat-item {
+         padding: 2em 0.5em;
+         border-radius: 20px;
+    }
+    .footer-grid {
+         /* Already 1fr from previous breakpoint */
+         text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+
+    /* Adjust FAQ padding/font size */
+    .faq-question {
+        padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.25);
+        font-size: 1rem;
+    }
+    .faq-answer {
+         padding: 0 calc(var(--spacing-unit) * 1.25) var(--spacing-unit);
+         font-size: 0.9rem;
+    }
+
+     /* Footer adjustments */
+    .site-footer {
+         height: auto; /* Allow footer height to adjust */
+         padding-top: calc(var(--spacing-unit) * 3);
+    }
+    .footer-grid {
+         margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+    .copyright {
+         margin-top: calc(var(--spacing-unit) * 2);
+    }
+}
+
+
+/* --- 3D Book Container Styles --- */
+/*
+  This section provides styling for the 3D book's container,
+  replacing the need for Tailwind CSS classes.
+*/
+.hero-image {
+    /* Existing styles from your file */
+    margin-top: calc(var(--spacing-unit) * 2);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Added styles for sizing and layout */
+    height: 36rem; /* 384px, default height for smaller screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#book-container {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* On larger screens (e.g., tablets and desktops), we increase the height */
+@media (min-width: 768px) {
+    .hero-image {
+        height: 500px;
+    }
+}
+

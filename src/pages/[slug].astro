@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Book from '../components/Book.astro';
+
+export async function getStaticPaths() {
+  const vips = await getCollection('vips');
+  return vips.map((vip) => ({
+    params: { slug: vip.slug },
+    props: { vip },
+  }));
+}
+
+const { vip } = Astro.props;
+const { data, render } = vip;
+const { founderName, companyName, coverDiffuse, backImage, spineImage, personalNote } = data;
+const { Content } = await render();
+
+const pageTitle = `Exclusive for ${founderName} | Closers Press`;
+---
+
+<Layout title={pageTitle}>
+  <main class="text-[#292524] selection:bg-[#FF7F49]/20">
+    
+    {/* Split Layout Container */}
+    <div class="md:flex md:flex-row relative items-start">
+        
+        {/* Left Column - Sticky Book */}
+        <div class="md:w-1/2 md:h-screen md:sticky md:top-0 flex items-center justify-center bg-[#F4F0EB] z-10 p-6 order-1 md:order-1">
+            <Book 
+                coverDiffuse={coverDiffuse} 
+                backImage={backImage}
+                spineImage={spineImage}
+                height={600}
+            />
+        </div>
+
+        {/* Right Column - Scrollable Content */}
+        <div class="md:w-1/2 bg-[#F4F0EB] order-2 md:order-2">
+            
+            {/* Header & Typography */}
+            <div class="px-6 pt-10 pb-12 md:pt-16 md:pb-16 space-y-10 animate-fade-in-up text-left max-w-xl mx-auto md:mx-0 md:pl-12">
+                <span class="text-[#FF7F49] font-serif text-2xl italic block mb-4">
+                    Exclusive for {founderName}
+                </span>
+                <h1 class="font-serif text-4xl md:text-5xl font-light leading-tight tracking-tight text-[#313131]">
+                    Welcome, {founderName}. <br /> Let's look at what just happened.
+                </h1>
+                <p class="text-xl md:text-2xl text-[#57534e] font-sans font-light leading-relaxed">
+                    You are relentlessly busy. You are targeted by every SaaS vendor on earth.
+                </p>
+
+                <p class="text-xl md:text-2xl text-[#57534e] font-sans font-light leading-relaxed">
+                Yet, you stopped what you were doing, read a physical book, and scanned a QR code.
+                </p>
+
+                {/* The Personal Note (The Bespoke Callout) */}
+                {personalNote && (
+                    <div class="prose prose-stone prose-lg prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight prose-headings:text-[#1c1917] prose-p:font-sans prose-p:font-light prose-p:text-[#44403c] prose-p:leading-relaxed">
+                        <p>{personalNote}</p>
+                    </div>
+                )}
+
+                {/* The Core Copy (Markdown Content) */}
+                <article class="prose prose-stone prose-lg prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight prose-headings:text-[#1c1917] prose-p:font-sans prose-p:font-light prose-p:text-[#44403c] prose-p:leading-relaxed">
+                    <Content />
+                </article>
+            </div>
+        </div>
+    </div>
+
+    {/* Google Calendar Appointment Scheduling Section */}
+    <section class="py-24 bg-white border-t border-stone-200">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="font-serif text-4xl md:text-5xl text-[#313131] font-light text-center mb-16">
+                Let's Discuss Your Campaign
+            </h2>
+            <!-- Google Calendar Appointment Scheduling begin -->
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3YFc3I2zp5iAUGM-pWKPWzsA9i4lUMQpiZCu8Nfni74qRRNSbcw5GjtbPXGcdj_RuyTD1E8Ppw?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+            <!-- end Google Calendar Appointment Scheduling -->
+        </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+	.animate-fade-in-up {
+		animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+	}
+	@keyframes fadeInUp {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+</style>

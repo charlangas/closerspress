@@ -1,0 +1,71 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Closers Press - The Immortal Pitch" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/img/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Google Fonts: Newsreader (Serif) & Inter (Sans-Serif) -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+		
+		<title>{title}</title>
+	</head>
+	<body class="bg-[#F4F0EB] text-[#292524] font-sans antialiased min-h-screen flex flex-col selection:bg-[#FF7F49]/20 selection:text-[#1c1917]">
+		<nav class="w-full pt-6 px-6 flex justify-start">
+			<img src="/img/logo.svg" alt="Closers Press" class="h-8 md:h-10" />
+		</nav>
+		<main class="flex-grow">
+			<slot />
+		</main>
+		<footer class="py-24 text-center border-t border-[#D6D3CD] mt-20">
+			<div class="container mx-auto px-6">
+                <p class="font-serif italic text-stone-500 mb-4 text-lg">"The Art of Access."</p>
+			    <p class="text-[#57534e] text-xs uppercase tracking-widest">&copy; {new Date().getFullYear()} Closers Press. All rights reserved.</p>
+            </div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--primary: #FF7F49;
+        --primary-hover: #E66D3B;
+	}
+	/* Smooth fade-in for page load */
+	body {
+		opacity: 0;
+		animation: fadeIn 0.8s ease-out forwards;
+	}
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+    
+    /* Elegant scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #F4F0EB;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #D6D3CD;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #c2beb9;
+    }
+</style>

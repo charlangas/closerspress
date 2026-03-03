@@ -1,0 +1,63 @@
+---
+// Book.astro
+---
+<div id="book-canvas-container" class="w-full h-96 cursor-grab"></div>
+
+<script>
+  import * as THREE from 'three';
+  // Import the rounded box geometry to fix the sharp edges
+  import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+  // 1. Setup Scene, Camera, Renderer
+  const container = document.getElementById('book-canvas-container');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Performance optimization
+  container.appendChild(renderer.domElement);
+
+  // 2. Load Textures (The PBR Magic)
+  const textureLoader = new THREE.TextureLoader();
+  const coverDiffuse = textureLoader.load('/textures/cover-color.jpg');
+  const coverNormal = textureLoader.load('/textures/cover-normal.jpg');
+  const coverRoughness = textureLoader.load('/textures/cover-roughness.jpg');
+
+  // 3. Create the Premium Material
+  const coverMaterial = new THREE.MeshStandardMaterial({
+    map: coverDiffuse,
+    normalMap: coverNormal,
+    roughnessMap: coverRoughness,
+    metalness: 0.1, // Keep low unless the whole book is metal
+  });
+
+  // 4. Create the Geometry with Bevels
+  // Width, Height, Depth, Segments, Radius of bevel
+  const geometry = new RoundedBoxGeometry(2, 3, 0.4, 4, 0.05); 
+  
+  // Note: For a real book, you'd use an array of materials (cover, spine, pages)
+  const book = new THREE.Mesh(geometry, coverMaterial);
+  scene.add(book);
+
+  // 5. Add Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  scene.add(ambientLight);
+  
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+  directionalLight.position.set(2, 2, 2);
+  scene.add(directionalLight);
+
+  // 6. Animation Loop
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    // Gentle floating rotation
+    book.rotation.y += 0.005;
+    book.rotation.x = Math.sin(Date.now() * 0.001) * 0.1;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
