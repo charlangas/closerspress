@@ -15,7 +15,7 @@ export const POST = async ({ request }) => {
 
     // Send the email
     await resend.emails.send({
-      from: 'Book Delivery <onboarding@resend.dev>', // Update this to your verified domain later
+      from: 'ClosersPress <carlos@radicalstandard.com>', // Update this to your verified domain later
       to: import.meta.env.MY_EMAIL_ADDRESS,
       subject: `Someone visited ${slug} on ClosersPress.com`,
       html: `<p>Someone visited ${slug} on ClosersPress.com</p>`
