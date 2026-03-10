@@ -31,10 +31,15 @@ const { title, description = "Closers Press - The Immortal Pitch" } = Astro.prop
 			<slot />
 		</main>
 		<footer class="py-24 text-center border-t border-[#D6D3CD] mt-20">
-			<div class="container mx-auto px-6">
-                <p class="font-serif italic text-stone-500 mb-4 text-lg">"The Art of Access."</p>
-			    <p class="text-[#57534e] text-xs uppercase tracking-widest">&copy; {new Date().getFullYear()} Closers Press. All rights reserved.</p>
-            </div>
+		    <div class="container mx-auto px-6">
+		        <p class="font-serif italic text-stone-500 mb-4 text-lg">"The Art of Access."</p>		        
+		        <p class="mb-4 text-sm font-sans font-light">
+		            Built by <a href="https://riseandrank.com" target="_blank"><img src="/img/riseandrank.svg"></a>
+		        </p>
+		        <p class="text-[#57534e] text-xs uppercase tracking-widest">
+		            &copy; {new Date().getFullYear()} Closers Press. All rights reserved.
+		        </p>
+		    </div>
 		</footer>
 	</body>
 </html>
