@@ -1,5 +1,5 @@
 ---
-founderName: "Chao Cheng-Shorland"
+founderName: "Chao"
 companyName: "ShelterZoom"
 coverDiffuse: "/img/shelterzoom-cover.webp"
 backImage: "/img/shelterzoom-back.webp"

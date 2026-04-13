@@ -1,9 +1,9 @@
 ---
 founderName: "Duncan"
 companyName: "Field AI"
-coverDiffuse: "/img/field-ai-cover.webp"
-backImage: "/img/field-ai-back.webp"
-spineImage: "/img/field-ai-spine.webp"
+coverDiffuse: "/img/fieldai-cover.webp"
+backImage: "/img/fieldai-back.webp"
+spineImage: "/img/fieldai-spine.webp"
 personalNote: "With a massive $405 million Series D and a $2 billion valuation already established, landing just a few more strategic enterprise accounts in heavy industry would build an unassailable structural moat that hardware-focused competitors like Figure AI, Tesla, and AgiBot simply can't cross."
 ---
 
